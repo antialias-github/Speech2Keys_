@@ -1,0 +1,17 @@
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\bin\Release\Speech2Keys.exe
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\bin\Release\Speech2Keys.exe.config
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\bin\Release\InputManager.dll
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.AINameForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.CommandNameForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.ErrorOnStartup.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.JokesForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.KeyPhraseForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.KeyPressedForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.MainForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.ParentForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.ProfileNameForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.QuickLaunch.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.ResponsesForm.resources
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.csproj.GenerateResource.Cache
+C:\Users\Peter\Documents\SharpDevelop Projects\Speech2Keys\Speech2Keys\obj\Release\Speech2Keys.exe
