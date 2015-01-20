@@ -1,0 +1,13 @@
+Refactoring:
+- set up an MVP pattern (or move to WPF for a slick interface)
+- rename interfaces to reflect more of what they do (combat software rot)
+- comment the code
+
+Features:
+- Captains Log (Speech controlled, limited numberof audio recordinsg. to be replayed via " replayn ext/last/previous/first"
+- find a way to make the use of the 'del' key intuitive again in the keypressed dialog (distinguish between adding "delete" to the key sequence and actually deleting marked entries from the list)
+- microphone monitor for setting microphone to work
+- get teamspeak to work via voice commands "teamspeak on" and "teamspeak off/over"
+- add config settings for speech output volume and speech speed (rate). 
+
+
