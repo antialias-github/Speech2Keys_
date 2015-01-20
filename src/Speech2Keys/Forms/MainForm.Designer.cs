@@ -51,7 +51,7 @@ namespace Speech2Keys
 		/// Do not change the method contents inside the source code editor. The Forms designer might
 		/// not be able to load this method if it was changed manually.
 		/// </summary>
-		private void InitializeComponent()
+		 private void InitializeComponent()
 		{
 			this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

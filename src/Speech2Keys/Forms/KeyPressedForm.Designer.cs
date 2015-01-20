@@ -25,6 +25,7 @@ namespace Speech2Keys
 		private System.Windows.Forms.Button clearButton;
 		private System.Windows.Forms.Button pauseTwoSecondsButton;
 		private System.Windows.Forms.Button deleteSelectedButton;
+		private System.Windows.Forms.Label label1;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -58,6 +59,7 @@ namespace Speech2Keys
 			this.clearButton = new System.Windows.Forms.Button();
 			this.pauseTwoSecondsButton = new System.Windows.Forms.Button();
 			this.deleteSelectedButton = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// backButton
@@ -144,9 +146,9 @@ namespace Speech2Keys
 			// 
 			// clearButton
 			// 
-			this.clearButton.Location = new System.Drawing.Point(12, 334);
+			this.clearButton.Location = new System.Drawing.Point(14, 370);
 			this.clearButton.Name = "clearButton";
-			this.clearButton.Size = new System.Drawing.Size(98, 23);
+			this.clearButton.Size = new System.Drawing.Size(96, 23);
 			this.clearButton.TabIndex = 22;
 			this.clearButton.Text = "Clear All";
 			this.clearButton.UseVisualStyleBackColor = true;
@@ -164,7 +166,7 @@ namespace Speech2Keys
 			// 
 			// deleteSelectedButton
 			// 
-			this.deleteSelectedButton.Location = new System.Drawing.Point(14, 305);
+			this.deleteSelectedButton.Location = new System.Drawing.Point(14, 326);
 			this.deleteSelectedButton.Name = "deleteSelectedButton";
 			this.deleteSelectedButton.Size = new System.Drawing.Size(96, 23);
 			this.deleteSelectedButton.TabIndex = 25;
@@ -172,12 +174,21 @@ namespace Speech2Keys
 			this.deleteSelectedButton.UseVisualStyleBackColor = true;
 			this.deleteSelectedButton.Click += new System.EventHandler(this.DeleteSelectedButtonClick);
 			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(14, 265);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(100, 58);
+			this.label1.TabIndex = 26;
+			this.label1.Text = "Deleter multiple entries with drag select or ctrl select (no shift select)";
+			// 
 			// KeyPressedForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ActiveBorder;
 			this.ClientSize = new System.Drawing.Size(284, 446);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.deleteSelectedButton);
 			this.Controls.Add(this.pauseTwoSecondsButton);
 			this.Controls.Add(this.clearButton);

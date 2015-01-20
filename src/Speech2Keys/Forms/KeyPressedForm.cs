@@ -20,10 +20,10 @@ namespace Speech2Keys
 	{
 		public Workflow Workflow{get;set;}
 		string lastPressedKey;
-		int lastKeyInsertIndex;
-		int numberOfSelectedItems;
-		bool LastActionWasHighlight;
+		int mouseSelectedIndex;
 		bool mouseJustUp;
+		
+		
 			
 		
 		public KeyPressedForm()
@@ -32,28 +32,18 @@ namespace Speech2Keys
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			
-		
-			
-//			sequenceTextBox.KeyDown += SequenceKeyDown;
-//			sequenceTextBox.KeyUp += SequenceKeyUp;
-			//sequenceListBox.KeyUp += SequenceListKeyUp;
-			
+	
 			sequenceListBox.KeyUp += SequenceListKeyUp;
 			sequenceListBox.KeyDown += SequenceListKeyDown;
 			sequenceListBox.MouseDown += SequenceListMouseDown;
 			sequenceListBox.MouseUp += SequenceListMouseUp;
-			
+			mouseSelectedIndex = -1;
 			
 			lastPressedKey = "none";
-			numberOfSelectedItems = 0;
-			LastActionWasHighlight = false;
-			lastKeyInsertIndex = -1;
+
+			
 			mouseJustUp = false;
 			
-			
-			
-		
 			
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
@@ -63,92 +53,27 @@ namespace Speech2Keys
 		void SequenceListMouseDown(object sender, MouseEventArgs  e)
 		{
 			int count = sequenceListBox.Items.Count;
-			
-			
-			if (count > 0 )
-				if (lastKeyInsertIndex != -1 
-				    && lastKeyInsertIndex < sequenceListBox.Items.Count 
-				    &&(((string)sequenceListBox.Items[lastKeyInsertIndex]) == "shift down" || ((string)sequenceListBox.Items[lastKeyInsertIndex]) == "control down"))
-				{
-					sequenceListBox.Items.RemoveAt(lastKeyInsertIndex);
-					lastKeyInsertIndex = -1;
-				}
+			if (count > 0 ) // there is a selected item
+				if (mouseSelectedIndex != -1 // there is one item selected by mouse
+				    && mouseSelectedIndex < sequenceListBox.Items.Count 
+				    &&(((string)sequenceListBox.Items[mouseSelectedIndex]) == "control down")) //and it was control
+						sequenceListBox.Items.RemoveAt(mouseSelectedIndex); // then remove it because that control was supposed to be used to mark multiple entries and not a valid entry in the sequence
+				
+			mouseJustUp = false;
 		}
 		void SequenceListMouseUp(object sender, MouseEventArgs  e)
 		{
 			mouseJustUp = true;
+			if (sequenceListBox.SelectedIndices.Count == 1)
+				mouseSelectedIndex = sequenceListBox.SelectedIndices[0];
+			else
+			{
+				mouseSelectedIndex = -1;
+			}
 		}
 		
-		void SequenceKeyUp(object sender, KeyEventArgs  e)
-		{
-		/*	if (LastActionWasHighlight && e.KeyCode == Keys.Delete)
-			{
-				LastActionWasHighlight  = false;
-				return;
-			}
-			
-			numberOfSelectedItems = sequenceListBox.SelectedIndices.Count;
-			LastActionWasHighlight = false;
-			string pressedKey = KeyTranslator.TranslateKeyToString(e.KeyCode) + " up";	
-			if (lastPressedKey != pressedKey)
-			{
-				lastPressedKey = pressedKey;
-				AddAfterSelection(pressedKey);
-				//sequenceListBox.Items.Add(pressedKey);		
-			}
-			e.Handled = true;*/
-		}
-		
-		void SequenceKeyDown(object sender, KeyEventArgs  e)
-		{
-		/*	if (LastActionWasHighlight && e.KeyCode == Keys.Delete)
-			{
-				for (int i = sequenceListBox.SelectedIndices.Count-1; i >= 0; i--)
-					if (sequenceListBox.SelectedIndices[i] >=0)
-						sequenceListBox.Items.RemoveAt(sequenceListBox.SelectedIndices[i]);
-					//iller.Focus();
-				sequenceListBox.ClearSelected();
-				numberOfSelectedItems = 0;
-				return;
-			}
-			
-			numberOfSelectedItems = sequenceListBox.SelectedIndices.Count;
-			LastActionWasHighlight = false;
-			string pressedKey = KeyTranslator.TranslateKeyToString(e.KeyCode) + " down";
-			if (lastPressedKey != pressedKey)
-			{
-				lastPressedKey = pressedKey;
-				AddAfterSelection(pressedKey);
-				//sequenceListBox.Items.Add(pressedKey);		
-			}
-			e.Handled = true;*/
-		}
-
 		void SequenceListKeyUp(object sender, KeyEventArgs  e)
 		{
-			/*if (e.KeyCode == Keys.Delete)
-		    {
-				
-					LastActionWasHighlight = false;
-					for (int i = sequenceListBox.SelectedIndices.Count-1; i >= 0; i--)
-						if (sequenceListBox.SelectedIndices[i] >=0)
-							sequenceListBox.Items.RemoveAt(sequenceListBox.SelectedIndices[i]);
-					//iller.Focus();
-					sequenceListBox.ClearSelected();
-					numberOfSelectedItems = 0;
-					
-			}
-			if (numberOfSelectedItems !=  sequenceListBox.SelectedIndices.Count)
-			{
-				numberOfSelectedItems = sequenceListBox.SelectedIndices.Count;
-				LastActionWasHighlight = true;;
-			}
-		
-			sequenceTextBox.Focus();
-						
-			e.Handled = true;
-			*/
-
 			string pressedKey = KeyTranslator.TranslateKeyToString(e.KeyCode) + " up";	
 			
 			if (mouseJustUp && (pressedKey == "control up" || pressedKey == "shift up" ))
@@ -161,6 +86,7 @@ namespace Speech2Keys
 					AddAfterSelection(pressedKey);	
 					mouseJustUp = false;
 				}
+			e.Handled = true;
 		}
 		
 		void SequenceListKeyDown(object sender, KeyEventArgs  e)
@@ -172,30 +98,26 @@ namespace Speech2Keys
 				AddAfterSelection(pressedKey);	
 				mouseJustUp = false;
 			}
+			e.Handled = true;
 		}
 		
 		public void Clear()
 		{
-			numberOfSelectedItems = 0;	
-			LastActionWasHighlight = false;
 			lastPressedKey = "none";
-			lastKeyInsertIndex = -1;
 			sequenceListBox.Items.Clear();
 			sequenceListBox.Focus();
-			
-		
+			mouseSelectedIndex = -1;
 		}
 		
 		public void Fill(Command command)
 		{
-			
-			
 			sequenceListBox.Items.Clear();
 			foreach (var s in command.sequence)
 				sequenceListBox.Items.Add(s);
 			sequenceListBox.Focus();
-			lastKeyInsertIndex = -1;
 			lastPressedKey = "none";
+			mouseSelectedIndex = sequenceListBox.Items.Count -1;
+			sequenceListBox.SelectedIndex = mouseSelectedIndex;
 		}
 		
 		public bool GetData(Command command)
@@ -246,30 +168,14 @@ namespace Speech2Keys
 		{
 			sequenceListBox.Focus();
 			lastPressedKey = "none";
-			lastKeyInsertIndex = -1;
 		}
 		void SequenceTextBoxTextChanged(object sender, EventArgs e)
 		{
 		//	sequenceTextBox.Clear();
 		}
-		List<string> GetSequence()
-		{
-			var result = new List<string>();
-			foreach (var i in sequenceListBox.Items)
-				result.Add((string)i);
-			return result;
-		}
-		void SetSequence(List<string> sequence)
-		{
-			sequenceListBox.Items.Clear();
-			foreach (var s in sequence)
-				sequenceListBox.Items.Add(s);
-			sequenceListBox.Focus();
-		}
+		
 		void ClearButtonClick(object sender, EventArgs e)
 		{
-			numberOfSelectedItems = 0;
-			LastActionWasHighlight = false;
 			sequenceListBox.Items.Clear();
 			sequenceListBox.Focus();
 		}
@@ -312,66 +218,58 @@ namespace Speech2Keys
 			sequenceListBox.Focus();
 		}
 		
-		void AddKey(string key)
-		{
-			var newItems = new List<string>();
-			var newSelectedIndices = new List<int>();
-			if (sequenceListBox.SelectedIndices.Count == 0)
-			{
-				sequenceListBox.Items.Add(key);
-			}
-			else
-			{
-				for (int i = 0; i < sequenceListBox.Items.Count; ++i)
-				{
-					newItems.Add((string)(sequenceListBox.Items[i]));
-					if (sequenceListBox.SelectedIndices.Contains(i))
-					{
-						newItems.Add(key);
-						newSelectedIndices.Add(i);
-					}
-				}
-				sequenceListBox.Items.Clear();
-				foreach (var n in newItems)
-					sequenceListBox.Items.Add(n);
-			}
-			foreach (var s in newSelectedIndices)
-				sequenceListBox.SetSelected(s, true);
-			sequenceListBox.Focus();
-		}
-		
+	
 		void AddAfterSelection(string key)
 		{
+			if (key == "none")
+				return;
+			sequenceListBox.ClearSelected();
 			
-			if (sequenceListBox.SelectedIndices.Count == 1 && sequenceListBox.SelectedIndices[0] >= 0)
+			if (mouseSelectedIndex != -1 && mouseSelectedIndex < sequenceListBox.Items.Count)
 			{
-				int index = sequenceListBox.SelectedIndices[0];
 				var newItems = new List<string>();
-				lastKeyInsertIndex = index+1;
 				for (int i = 0; i < sequenceListBox.Items.Count; ++i)
 				{
 					newItems.Add((string)(sequenceListBox.Items[i]));
-					if (i == index)
+					if (i == mouseSelectedIndex)
 						newItems.Add(key);
 				}
+				mouseSelectedIndex++;
 				sequenceListBox.Items.Clear();
 				foreach (var n in newItems)
 						sequenceListBox.Items.Add(n);
-				sequenceListBox.SelectedIndex = index+1;
+				sequenceListBox.SelectedIndex = mouseSelectedIndex;
 			}
 			else
 			{
-				lastKeyInsertIndex = sequenceListBox.SelectedIndices.Count;
-				sequenceListBox.Items.Add(key);					
+				sequenceListBox.Items.Add(key);	
+				mouseSelectedIndex = sequenceListBox.Items.Count -1;
+				sequenceListBox.SelectedIndex = mouseSelectedIndex;
 			}
 		}
 		void DeleteSelectedButtonClick(object sender, EventArgs e)
 		{
+			
 			for (int i = sequenceListBox.SelectedIndices.Count-1; i >= 0; i--)
 				if (sequenceListBox.SelectedIndices[i] >=0)
 					sequenceListBox.Items.RemoveAt(sequenceListBox.SelectedIndices[i]);
-			sequenceListBox.ClearSelected();
-			numberOfSelectedItems = 0;
+			
+			
+			var newItems = new List<string>();
+			for (int i = 0; i < sequenceListBox.Items.Count; ++i)
+				newItems.Add((string)(sequenceListBox.Items[i]));
+			sequenceListBox.Items.Clear();
+			foreach (var n in newItems)
+					sequenceListBox.Items.Add(n);
+
+			if (sequenceListBox.Items.Count > 0)
+			{
+				mouseSelectedIndex = sequenceListBox.Items.Count -1;
+				sequenceListBox.SelectedIndex = mouseSelectedIndex;
+			}
+			else
+				mouseSelectedIndex = -1;
+			
 			sequenceListBox.Focus();
 		}
 		

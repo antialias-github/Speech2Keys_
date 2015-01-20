@@ -197,6 +197,7 @@ namespace Speech2Keys
 				return "F11";
 			if (key == Keys.F12)
 				return "F12";
+			
 			 
 			return "none";
 
