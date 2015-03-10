@@ -29,6 +29,7 @@ namespace Speech2Keys
 		HashSet<string> keywords;
 		SpeechSynthesizer synthesizer;
 		bool standby;
+		bool speakResponses;
 		ParentForm parentForm;
 		
 		
@@ -40,6 +41,7 @@ namespace Speech2Keys
 			synthesizer.Volume = 100; 
             synthesizer.Rate = +1;
             standby = false;
+            speakResponses = true;
             logTextBox = parentForm.GetLogBox();
 			timer = new System.Timers.Timer(1500);
 			//timer.Elapsed += new ElapsedEventHandler(PhraseComplete);
@@ -98,11 +100,13 @@ namespace Speech2Keys
         	{
         		if (!standby)
         		{
+        			if (command.name == "Turn Responses On")
+        				speakResponses = true;
         		
         			string text = command.GenerateResponse();
-        			
+
         			if (!string.IsNullOrEmpty(text) && !(command.name == "Reactivate Speech Recognition" || command.name == "Teamspeak off"))
-        				if (!command.responseInPost)
+        				if (!command.responseInPost && speakResponses)
         					synthesizer.SpeakAsync(text);
         			
         			
@@ -121,8 +125,13 @@ namespace Speech2Keys
 
 	        		
         			if (!string.IsNullOrEmpty(text) && !(command.name == "Reactivate Speech Recognition" || command.name == "Teamspeak off"))
-    					if (command.responseInPost)
+    					if (command.responseInPost && speakResponses)
 	        				synthesizer.SpeakAsync(text);
+        			
+        			
+        				
+        			if (command.name == "Turn Responses Off")
+        				speakResponses = false;
         		}
         		else
     			{

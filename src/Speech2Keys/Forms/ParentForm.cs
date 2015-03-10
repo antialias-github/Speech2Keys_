@@ -205,7 +205,9 @@ namespace Speech2Keys
 						       || name == "Reactivate Speech Recognition"
 						       || name == "Stop Speech Output"
 						       || name == "Teamspeak on"
-						       || name == "Teamspeak off"))
+						       || name == "Teamspeak off"
+						       || name == "Turn Responses on"
+						       || name == "Turn Responses off"))
 						{
 							commandList.RemoveCommand(name);
 							commandsListBox.Items.RemoveAt(commandsListBox.SelectedIndices[i]);

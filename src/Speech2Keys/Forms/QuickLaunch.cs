@@ -50,11 +50,12 @@ namespace Speech2Keys
 		void CreateAndEditButtonClick(object sender, EventArgs e)
 		{
 			((ICanEdit)MdiParent).EnableMenuStrip(true);
-			List<Command> commands;
+			
 			commandList.Reset();
-			commands = commandList.CreateStandardCommands();
+			commandList.CreateStandardCommands();
+			commandList.AddDefaultStandardResponses();
 			parentForm.Clear();
-			foreach (var c in commands)
+			foreach (var c in commandList.listOfCommands)
 				parentForm.AddCommand(c);
 				
 			commandList.ProfileName = "New Profile";

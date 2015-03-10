@@ -241,6 +241,7 @@ namespace Speech2Keys
 				{
 					commandList.Reset();
 					serializer.Deserialize(ref commandList, openFileDialog1.FileName);
+					commandList.CreateStandardCommands();
 					parentForm.commandList = commandList;
 					parentForm.FillCommandsListBox(commandList);
 					this.Text = commandList.ProfileName;

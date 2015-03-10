@@ -160,11 +160,12 @@ namespace Speech2Keys
 					string name;
 					if (((ProfileNameForm)(currentItem.form)).GetData(out name))
 					{
-						List<Command> commands;
+						
 						commandList.Reset();
-						commands = commandList.CreateStandardCommands();
+						commandList.CreateStandardCommands();
+						commandList.AddDefaultStandardResponses();
 						parentForm.Clear();
-						foreach (var c in commands)
+						foreach (var c in commandList.listOfCommands)
 							parentForm.AddCommand(c);
 							
 						commandList.ProfileName = name;
